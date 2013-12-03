@@ -2,8 +2,14 @@
 
 if tmux has-session -t vim
 then
-    echo "You already have a VIM session open in TMUX!"
+    if [ "$#" != "1" ]
+    then
+        echo "There is another VIM session in TMUX and we cannot open tabs with multiple parameters. Do manually!"
+        exit 1;
+    fi
+
+    tmux send-keys -t vim:vim ":tabe $1" C-m
     exit 1;
 fi
 
-tmux new-session -s vim "vim $@"
+tmux new-session -s vim -n vim "vim $@"
