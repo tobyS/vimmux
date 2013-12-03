@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if tmux has-session -t vim
+then
+    echo "You already have a VIM session open in TMUX!"
+    exit 1;
+fi
+
+tmux new-session -s vim "vim $@"
