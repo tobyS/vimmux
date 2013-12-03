@@ -8,7 +8,9 @@ then
         exit 1;
     fi
 
-    tmux send-keys -t vim:vim ":tabe $1" C-m
+    file=$(readlink -f $1)
+    tmux send-keys -t vim:vim ":tabe $file" C-m
+    tmux attach-session -t vim
     exit 1;
 fi
 
